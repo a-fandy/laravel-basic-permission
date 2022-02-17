@@ -1,0 +1,29 @@
+{
+    "name": "afdn/permission",
+    "description": "simple permission and role for laravel",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Afdn\\Permission\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "a-fandy",
+            "email": "andreasfnd@gmail.com"
+        }
+    ],
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Afdn\\Permission\\PermissionServiceProvider"
+            ],
+            "aliases":
+            {
+                "Permission": "Afdn\\Permission\\BasicPermission"
+            }
+        }
+    }
+}
