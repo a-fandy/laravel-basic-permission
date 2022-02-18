@@ -20,6 +20,8 @@
         "afdn/permission": "@dev"
     },
     ```
+ - run command `composer update`
+ 
 ### with composer 
 `composer require afdn/permission`
 
