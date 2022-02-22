@@ -29,7 +29,7 @@ class BaseController extends Controller
 
     public function RedirectBack($isSuccess, $title, $action)
     {
-        $status  = $isSuccess ? $this->status(true, $title . " Successfully " . $action, "") :  $this->status(false, "", "Failed to " . $action . " " . $title);
+        $status  = $isSuccess ? $this->status(true, $title . " successfully " . $action, "") :  $this->status(false, "", "failed to " . $action . " " . $title);
         return redirect()->back()->with($status);
     }
 
@@ -41,7 +41,7 @@ class BaseController extends Controller
 
     public function RedirectRoute($route, $isSuccess, $title, $action)
     {
-        $status  = $isSuccess ? $this->status(true, $title . " Successfully " . $action, "") :  $this->status(false, "", "Failed to " . $action . " " . $title);
+        $status  = $isSuccess ? $this->status(true, $title . " successfully " . $action, "") :  $this->status(false, "", "failed to " . $action . " " . $title);
         return redirect()->route($route)->with($status);
     }
 
