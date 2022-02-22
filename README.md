@@ -3,8 +3,8 @@
 ## How to Install
 
 ### Download 
-- clone / download this project 
-- place to `packages/afdn/permission` 
+- clone / download / copy this project 
+- paste to `packages/afdn/permission` 
 - add this to composer.json in laravel
     ```
      "repositories": {
@@ -20,7 +20,10 @@
         "afdn/permission": "@dev"
     },
     ```
-### with composer `composer require afdn/permission`
+ - run command `composer update`
+ 
+### with composer 
+`composer require afdn/permission`
 
 
 ## How to use (ongoing)
