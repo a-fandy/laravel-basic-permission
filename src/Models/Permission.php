@@ -40,7 +40,8 @@ class Permission extends Model
     {
         $role = Permission::select('name as role','child')->where('type', SELF::ROLE);
         if (!empty($user)) {
-            $role = $role->where('name', $user->role)->first();
+            $userRole = isset($user->role) ? $user->role : $user;
+            $role = $role->where('name', $userRole)->first();
         } else {
             $role = $role->get();
         }
