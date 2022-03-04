@@ -14,7 +14,7 @@ class BasicPermission extends Controller
         $permission = $model->getPermission($name);
         $authCek = $auth ? Auth::check() : true;
         if($authCek){
-            $role = $model->getRole(Auth::user());
+            $role = empty($role) ? $model->getRole(Auth::user()) : $role;
             if (!empty($role) && !empty($permission)) {
                 $access = json_decode($role->child);
                 $access = empty($access) ? array() : $access;
