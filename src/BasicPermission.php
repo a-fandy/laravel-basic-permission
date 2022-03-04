@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class BasicPermission extends Controller
 {
-    public static function access($name)
+    public static function access($name,$role = null, $auth = true)
     {
         $model = new PermissionModel;
         $permission = $model->getPermission($name);
-        if(Auth::check()){
+        $authCek = $auth ? Auth::check() : true;
+        if($authCek){
             $role = $model->getRole(Auth::user());
             if (!empty($role) && !empty($permission)) {
                 $access = json_decode($role->child);
