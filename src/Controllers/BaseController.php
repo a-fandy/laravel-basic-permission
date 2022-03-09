@@ -27,9 +27,9 @@ class BaseController extends Controller
         return $status;
     }
 
-    public function RedirectBack($isSuccess, $title, $action)
+    public function RedirectBack($isSuccess, $title, $action, $message = "")
     {
-        $status  = $isSuccess ? $this->status(true, $title . " successfully " . $action, "") :  $this->status(false, "", "failed to " . $action . " " . $title);
+        $status  = $isSuccess ? $this->status(true, "successfully " . $action." ".$title." ".$message, "") :  $this->status(false, "", "failed to " . $action . " " . $title." ".$message);
         return redirect()->back()->with($status);
     }
 
@@ -39,9 +39,9 @@ class BaseController extends Controller
         return view($view, array_merge($data, compact('title')));
     }
 
-    public function RedirectRoute($route, $isSuccess, $title, $action)
+    public function RedirectRoute($route, $isSuccess, $title, $action, $message = "")
     {
-        $status  = $isSuccess ? $this->status(true, $title . " successfully " . $action, "") :  $this->status(false, "", "failed to " . $action . " " . $title);
+        $status  = $isSuccess ? $this->status(true, "successfully " . $action." ".$title." ".$message, "") :  $this->status(false, "", "failed to " . $action . " " . $title." ".$message);
         return redirect()->route($route)->with($status);
     }
 
