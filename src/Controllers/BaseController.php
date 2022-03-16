@@ -11,14 +11,19 @@ class BaseController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function status($isSuccess, $messageSucces = 'Data berhasil diproses', $messageError = 'Data gagal diproses')
+    public function status($isSuccess, $messageSucces = 'Data berhasil diproses', $messageError = 'Data gagal diproses' , $class = null )
     {
         if ($isSuccess) {
             $status = array(
                 'class' => 'alert-success',
                 'message' => $messageSucces,
             );
-        } else {
+        } elseif(!empty($class)) {
+            $status = array(
+                'class' => $class,
+                'message' => $messageSucces,
+            );
+        }else{
             $status = array(
                 'class' => 'alert-danger',
                 'message' => $messageError,
