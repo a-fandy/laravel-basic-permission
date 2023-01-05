@@ -54,4 +54,14 @@ class BaseController extends Controller
     {
         return array_intersect_key($input, array_flip($model->getFillable()) );
     }
+
+    public function decryptId($id)
+    {
+        $decode = base64_decode($id);
+        $explode = explode(':',$decode);
+        if(!isset($explode[1])){
+            return false;
+        }
+        return $explode[1];
+    }
 }
