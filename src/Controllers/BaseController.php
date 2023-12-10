@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\App;
 
 class BaseController extends Controller
 {
@@ -15,16 +16,19 @@ class BaseController extends Controller
     {
         if ($isSuccess) {
             $status = array(
+                'status' => 1,
                 'class' => 'alert-success',
                 'message' => $messageSucces,
             );
         } elseif(!empty($class)) {
             $status = array(
+                'status' => 1,
                 'class' => $class,
                 'message' => $messageSucces,
             );
         }else{
             $status = array(
+                'status' => 0,
                 'class' => 'alert-danger',
                 'message' => $messageError,
             );
@@ -32,9 +36,9 @@ class BaseController extends Controller
         return $status;
     }
 
-    public function RedirectBack($isSuccess, $title, $action, $message = "")
+    public function RedirectBack($isSuccess, $title, $action)
     {
-        $status  = $isSuccess ? $this->status(true, "successfully " . $action." ".$title." ".$message, "") :  $this->status(false, "", "failed to " . $action . " " . $title." ".$message);
+        $status  = $isSuccess ? $this->status(true, __('messages.successfully-'.$action,['title'=>$title])) :  $this->status(false, "", __('messages.failed-'.$action,['title'=>$title]));
         return redirect()->back()->with($status);
     }
 
@@ -44,9 +48,9 @@ class BaseController extends Controller
         return view($view, array_merge($data, compact('title')));
     }
 
-    public function RedirectRoute($route, $isSuccess, $title, $action, $message = "")
+    public function RedirectRoute($route, $isSuccess, $title, $action)
     {
-        $status  = $isSuccess ? $this->status(true, "successfully " . $action." ".$title." ".$message, "") :  $this->status(false, "", "failed to " . $action . " " . $title." ".$message);
+        $status  = $isSuccess ? $this->status(true, __('messages.successfully-'.$action,['title'=>$title])) :  $this->status(false, "", __('messages.failed-'.$action,['title'=>$title]));
         return redirect()->route($route)->with($status);
     }
 
@@ -64,4 +68,5 @@ class BaseController extends Controller
         }
         return $explode[1];
     }
+
 }
