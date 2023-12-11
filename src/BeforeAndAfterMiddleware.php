@@ -28,7 +28,7 @@ class BeforeAndAfterMiddleware
             $newInput = $input;
             $input = $request->session()->getOldInput();
             $newInput = array_diff_assoc($newInput,$input);
-        } 
+        }
         $userId = Auth::check() ? Auth::id() : 0;
 
         $response =  $next($request);
@@ -38,15 +38,17 @@ class BeforeAndAfterMiddleware
         $statusCode = in_array($response->getStatusCode(),[302,200])? 1 : 0;
         $status =  $statusSave && $statusValidation && $statusCode ? 1 : 0;
         $message =  !$statusValidation ? $response->exception->getMessage() : "";
-        $log = new ActionLog;
-        $log->name = $url;
-        $log->method = $method;
-        $log->request = json_encode($this->removeKeyArray($input));
-        $log->request_new = json_encode($this->removeKeyArray($newInput));
-        $log->user_id = $userId;
-        $log->status = $status;
-        $log->message = $message;
-        $log->save();
+        if(!in_array($url,ActionLog::EXCLUDE_URL) && ActionLog::ACTIVE){
+            $log = new ActionLog;
+            $log->name = $url;
+            $log->method = $method;
+            $log->request = json_encode($this->removeKeyArray($input));
+            $log->request_new = json_encode($this->removeKeyArray($newInput));
+            $log->user_id = $userId;
+            $log->status = $status;
+            $log->message = $message;
+            $log->save();
+        }
         return $response;
     }
 

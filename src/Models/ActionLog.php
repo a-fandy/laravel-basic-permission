@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class ActionLog extends Model
 {
-    use HasFactory;
+    public const ACTIVE = true;
 
     public const EXCLUDE_INPUT = [
         'password' => '',
+    ];
+
+    public const EXCLUDE_URL = [
+        '/',
     ];
 }
