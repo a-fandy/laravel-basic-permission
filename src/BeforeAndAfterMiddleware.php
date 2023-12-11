@@ -41,12 +41,16 @@ class BeforeAndAfterMiddleware
         $log = new ActionLog;
         $log->name = $url;
         $log->method = $method;
-        $log->request = json_encode($input);
-        $log->request_new = json_encode($newInput);
+        $log->request = json_encode($this->removeKeyArray($input));
+        $log->request_new = json_encode($this->removeKeyArray($newInput));
         $log->user_id = $userId;
         $log->status = $status;
         $log->message = $message;
         $log->save();
         return $response;
+    }
+
+    public function removeKeyArray($array) {
+        return array_diff_key($array, ActionLog::EXCLUDE_INPUT);
     }
 }

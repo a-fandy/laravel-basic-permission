@@ -9,5 +9,7 @@ class ActionLog extends Model
 {
     use HasFactory;
 
-    
+    public const EXCLUDE_INPUT = [
+        'password' => '',
+    ];
 }
