@@ -27,7 +27,7 @@ class BeforeAndAfterMiddleware
         if (preg_match('/-update$/', $url) && $method == "POST") {
             $newInput = $input;
             $input = $request->session()->getOldInput();
-            $newInput = array_diff_assoc($newInput,$input);
+            $newInput = array_diff_assoc($this->removeKeyArray($newInput),$this->removeKeyArray($input));
         }
         $userId = Auth::check() ? Auth::id() : 0;
 
